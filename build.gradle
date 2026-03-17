@@ -45,6 +45,12 @@ ext {
 group = 'net.jmp.solr.index.products'
 version = '1.0.0'
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(26)
+    }
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
