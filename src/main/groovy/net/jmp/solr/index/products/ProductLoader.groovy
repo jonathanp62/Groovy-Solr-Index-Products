@@ -32,14 +32,14 @@ package net.jmp.solr.index.products
 
 import org.apache.solr.client.solrj.impl.HttpJdkSolrClient
 
-import org.apache.solr.client.solrj.response.UpdateResponse;
+import org.apache.solr.client.solrj.response.UpdateResponse
 
 /**
  * The product loader class
  */
 class ProductLoader {
     static loadProducts(String solrUrl, String solrCollection, List<Product> products) {
-        HttpJdkSolrClient client = new HttpJdkSolrClient.Builder(solrUrl).build();
+        HttpJdkSolrClient client = new HttpJdkSolrClient.Builder(solrUrl).build()
 
         UpdateResponse addBeansResponse = client.addBeans(solrCollection, products)
 
