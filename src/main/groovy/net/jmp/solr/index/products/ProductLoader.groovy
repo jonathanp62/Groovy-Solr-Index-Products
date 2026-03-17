@@ -1,7 +1,7 @@
 package net.jmp.solr.index.products
 
 /*
- * (#)Runner.groovy 1.0.0   03/17/2026
+ * (#)ProductLoader.groovy  1.0.0   03/17/2026
  *
  * @author    Jonathan Parker
  * @version   1.0.0
@@ -30,45 +30,23 @@ package net.jmp.solr.index.products
  * SOFTWARE.
  */
 
+import org.apache.solr.client.solrj.impl.HttpJdkSolrClient
+
+import org.apache.solr.client.solrj.response.UpdateResponse;
+
 /**
- * The runner class for the Solr index products application
+ * The product loader class
  */
-class Runner {
-    /** The configuration */
-    private Configuration configuration
+class ProductLoader {
+    static loadProducts(String solrUrl, String solrCollection, List<Product> products) {
+        HttpJdkSolrClient client = new HttpJdkSolrClient.Builder(solrUrl).build();
 
-    /** The version of the application */
-    private String version
+        UpdateResponse addBeansResponse = client.addBeans(solrCollection, products)
 
-    /** The list of command line arguments */
-    private List<String> args
+        println("Add products response: ${addBeansResponse}")
 
-    /**
-     * The constructor
-     *
-     * @param configuration Configuration   The configuration
-     * @param version       String          The version of the application
-     * @param args          List<String>    The list of command line arguments
-     */
-    Runner(Configuration configuration,  String version, List<String> args) {
-        this.configuration = configuration
-        this.version = version
-        this.args = args
-    }
-    /**
-     * The run method for the application
-     *
-     * @return int  The exit code
-     */
-    int run() {
-        println("Solr Index Products ${this.version}")
+        UpdateResponse commitResponse = client.commit(solrCollection)
 
-        def products = ProductCreator.createProducts()
-
-        ProductLoader.loadProducts(this.configuration.solrUrl, this.configuration.solrCollection, products)
-
-        println("Added ${products.size()} products")
-
-        return 0
+        println("Commit response: ${commitResponse}")
     }
 }

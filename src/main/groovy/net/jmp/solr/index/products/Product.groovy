@@ -1,7 +1,7 @@
 package net.jmp.solr.index.products
 
 /*
- * (#)Runner.groovy 1.0.0   03/17/2026
+ * (#)Product.groovy    1.0.0   03/17/2026
  *
  * @author    Jonathan Parker
  * @version   1.0.0
@@ -30,45 +30,36 @@ package net.jmp.solr.index.products
  * SOFTWARE.
  */
 
+import groovy.transform.Canonical
+
+import org.apache.solr.client.solrj.beans.Field
+
 /**
- * The runner class for the Solr index products application
+ * The Product class
  */
-class Runner {
-    /** The configuration */
-    private Configuration configuration
+@Canonical
+class Product {
+    @Field("id")
+    String id
 
-    /** The version of the application */
-    private String version
+    @Field("name")
+    String name
 
-    /** The list of command line arguments */
-    private List<String> args
+    @Field("description")
+    String description
 
-    /**
-     * The constructor
-     *
-     * @param configuration Configuration   The configuration
-     * @param version       String          The version of the application
-     * @param args          List<String>    The list of command line arguments
-     */
-    Runner(Configuration configuration,  String version, List<String> args) {
-        this.configuration = configuration
-        this.version = version
-        this.args = args
-    }
-    /**
-     * The run method for the application
-     *
-     * @return int  The exit code
-     */
-    int run() {
-        println("Solr Index Products ${this.version}")
+    @Field("category")
+    String category
 
-        def products = ProductCreator.createProducts()
+    @Field("brand")
+    String brand
 
-        ProductLoader.loadProducts(this.configuration.solrUrl, this.configuration.solrCollection, products)
+    @Field("price")
+    double price
 
-        println("Added ${products.size()} products")
+    @Field("in_stock")
+    boolean inStock
 
-        return 0
-    }
+    @Field("tags")
+    List<String> tags
 }
