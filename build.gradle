@@ -1,8 +1,9 @@
 /*
+ * (#)build.gradle  2.0.0   05/07/2026
  * (#)build.gradle  1.0.0   03/17/2026
  *
  * @author   Jonathan Parker
- * @version  1.0.0
+ * @version  2.0.0
  * @since    1.0.0
  *
  * MIT License
@@ -30,7 +31,7 @@
 
 plugins {
     id 'groovy'
-    id 'com.gradleup.shadow'                    version '9.3.1'
+    id 'com.gradleup.shadow'                    version '9.4.1'
     id 'net.jmp.gradle.plugin.projectinfo-info' version '0.2.0'
 }
 
@@ -38,12 +39,12 @@ apply plugin: 'net.jmp.gradle.plugin.projectinfo-info'
 
 ext {
     project.group = 'net.jmp.solr.index.products'
-    project.version = '1.0.0'
+    project.version = '2.0.0'
     project.description = 'to index the demonstration products using SolrJ'
 }
 
 group = 'net.jmp.solr.index.products'
-version = '1.0.0'
+version = '2.0.0'
 
 java {
     toolchain {
@@ -57,7 +58,7 @@ repositories {
 }
 
 dependencies {
-    implementation      'org.apache.groovy:groovy-all:4.0.30'
+    implementation      'org.apache.groovy:groovy-all:5.0.5'
     implementation      'org.apache.solr:solr-solrj:10.0.0'
 
     testImplementation  platform('org.junit:junit-bom:5.10.0')
